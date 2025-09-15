@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void swap(int* a, int* b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void heapifyUp(int heap[], int index) {
+    while (index > 0 && heap[index] < heap[(index - 1) / 2]) {
+        swap(&heap[index], &heap[(index - 1) / 2]);
+        index = (index - 1) / 2;
+    }
+}
+
+void heapifyDown(int heap[], int size, int index) {
+    int smallest = index;
+    int left = 2 * index + 1;
+    int right = 2 * index + 2;
+
+    if (left < size && heap[left] < heap[smallest])
+        smallest = left;
+    if (right < size && heap[right] < heap[smallest])
+        smallest = right;
+
+    if (smallest != index) {
+        swap(&heap[index], &heap[smallest]);
+        heapifyDown(heap, size, smallest);
+    }
+}
+
+void insert(int heap[], int* size, int value) {
+    heap[*size] = value;
+    heapifyUp(heap, *size);
+    (*size)++;
+}
+
+int extractMin(int heap[], int* size) {
+    int min = heap[0];
+    heap[0] = heap[--(*size)];
+    heapifyDown(heap, *size, 0);
+    return min;
+}
+
+int findKthLargest(int* nums, int numsSize, int k) {
+    int* heap = (int*)malloc(sizeof(int) * k);
+    int heapSize = 0;
+
+    for (int i = 0; i < numsSize; ++i) {
+        if (heapSize < k) {
+            insert(heap, &heapSize, nums[i]);
+        } else if (nums[i] > heap[0]) {
+            heap[0] = nums[i];
+            heapifyDown(heap, heapSize, 0);
+        }
+    }
+
+    int result = heap[0];
+    free(heap);
+    return result;
+}
