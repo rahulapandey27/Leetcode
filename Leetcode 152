@@ -1,0 +1,17 @@
+Java solution, not optimal
+
+class Solution {
+    public int maxProduct(int[] nums) {
+        //we are going to first try the brute force method 
+        //we will use 2 for loops 
+        int maximum= nums[0];
+        for (int i=0; i<nums.length; i++){
+            int product=1;//we have to intialise the product to be used in the next loop
+            for(int j=i; j<nums.length; j++){
+                product*=nums[j];
+                maximum=Math.max(maximum,product);
+            }
+        }
+        return maximum;
+    }
+}
