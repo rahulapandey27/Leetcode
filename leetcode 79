@@ -1,0 +1,38 @@
+tough question , not a medium question
+Java solution
+
+class Solution {
+    public boolean exist(char[][] board, String word) {
+        //we have to traverse and find if the complete word exists in the matrix
+        //if we find one element then we have to go up, down , right and left to the elements 
+        //it will all be connected to the first element we find 
+        //until we find that element till then we have to traverse 
+        char[] wordArray = word.toCharArray();//we have to convert the word into char array in able to search the chararcters
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                //we first find the first element 
+                if (board[i][j] == wordArray[0] && exists(board, i, j, wordArray, 0)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    static boolean exists(char[][] board, int i, int j, char[] word, int idx) {
+        if (//the basic conditions for instant false
+        i < 0 || i >= board.length || j < 0 || j >= board[0].length || board[i][j] != word[idx] || board[i][j] == '*') {
+            return false;
+        }
+        if (idx == word.length - 1) {
+            return true;//this will only happen when there is only one word
+        }
+        char ch = board[i][j];
+        board[i][j] = '*';
+        boolean result = exists(board, i + 1, j, word, idx + 1) || exists(board, i - 1, j, word, idx + 1)
+                || exists(board, i, j + 1, word, idx + 1) || exists(board, i, j - 1, word, idx + 1);
+        board[i][j] = ch;
+        return result;
+    }
+
+}
