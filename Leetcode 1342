@@ -1,0 +1,16 @@
+resurrsive method
+
+class Solution {
+    public int numberOfSteps(int num) {
+        //right now we are going to write for recursion
+        if(num==0){
+            return 0;
+        }
+        if (num%2==0){
+            return 1+ numberOfSteps(num/2);
+        }
+        else{
+            return 1+ numberOfSteps(num-1);
+        }
+    }
+}
