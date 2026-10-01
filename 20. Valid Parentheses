@@ -1,4 +1,6 @@
 Java Solution
+Daily Challenge Question 10/01/2026  (month/day/year)
+
 
 class Solution {
     public boolean isValid(String str) {
