@@ -1,0 +1,25 @@
+Java Solution,not the optimal solution
+
+
+class Solution {
+    public int compress(char[] chars) {
+        int index=0;
+        int i=0;
+        while(i<chars.length){
+            char current=chars[i];//we will use the this to compare if same concurrent elements 
+            int count=0;
+            while(i<chars.length && chars[i]==current){//the count will be increased till the char is same
+                count++;
+                i++;
+            }
+            chars[index++]=current;
+            if(count>1){//we will only convert the count only to char only if >1
+                String Freq=String.valueOf(count);//we first convert the count to string
+                for(char c:Freq.toCharArray()){//then covert to char and individully inserted into array
+                    chars[index++]=c;
+                }
+            }
+        }
+        return index;
+    }
+}
