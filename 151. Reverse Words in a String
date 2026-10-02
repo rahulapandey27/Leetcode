@@ -1,0 +1,16 @@
+//Java Solution, not the most optimised but beats 66% 
+
+class Solution {
+    public String reverseWords(String s) {
+        s=s.trim();//removes the spaces from the tart and the end 
+        String[] words=s.split("\\s+");//means whenever it encounters the single or more space it splits the string and stores the words
+        StringBuilder ans=new StringBuilder();//mutable string format 
+        for(int i=words.length-1; i>=0; i--){
+            ans.append(words[i]);//we append words from the last 
+            if(i!=0){
+                ans.append(" ");//we dont have spaces in the words array we have to add after every word 
+            }
+        }
+        return ans.toString();//we return the answer into the string format 
+    }
+}
