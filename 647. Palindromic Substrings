@@ -1,0 +1,28 @@
+//Java Solution optimal Solution
+
+class Solution {
+    public int countSubstrings(String s) {
+        //we have to make the word pallindrome 
+        //so cannot just apply the factorial on length of the string 
+        //there can be single character or diff characters
+        //Two cases 
+        //Oddcase->  deals with odd number of elements 1,3,5 etc in start left==right . Then left-- and right++
+        //even case-> deals with number of elements being even like 2,4,6 etc and same progression 
+        int count=0;
+        for (int i=0;  i<s.length(); i++){
+            count+= NumCount(s,i,i);//odd case 
+            count+= NumCount(s,i,i+1);//even case
+        }
+        return count;
+    }
+    private int NumCount(String s, int left, int right){
+        int count=0;
+        while (left>=0 && right<s.length() && s.charAt(left)==s.charAt(right)){
+            count++;
+            left--;
+            right++;
+            //we are going to treat the i as the centre element 
+        }
+        return count;
+    }
+}
