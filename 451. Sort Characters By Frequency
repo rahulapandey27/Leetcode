@@ -1,0 +1,22 @@
+//Java solution 
+
+class Solution {
+    public String frequencySort(String s) {
+
+        HashMap<Character, Integer> map = new HashMap<>();//using hash map to store in key value pair 
+        for(char c : s.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) + 1);//we will now store the char along wwith their frequency 
+        }
+        List<Character> chars = new ArrayList<>(map.keySet());//putting the chars into the list 
+        chars.sort((a, b) -> map.get(b) - map.get(a));//now sorting on the basis of frequency 
+        StringBuilder ans = new StringBuilder();//for storing in the string format
+        for(char c : chars) {
+            int count = map.get(c);//getting the char
+            for(int i = 0; i < count; i++) {
+                ans.append(c);
+            }
+        }
+
+        return ans.toString();//resulting in the sorted chars on the basis of freq
+    }
+}
